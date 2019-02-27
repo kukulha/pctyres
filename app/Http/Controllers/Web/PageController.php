@@ -22,12 +22,6 @@ class PageController extends Controller
         return view('home', compact('posts'));
     }
 
-    public function admin()
-    {
-        $posts = Post::orderBy('id', 'DESC')->where('status', 'PUBLISHED')->paginate();
-        return view('web.dashboard', compact('posts'));
-    }
-
     public function blog()
     {
     	$posts = Post::orderBy('id', 'DESC')->where('status', 'PUBLISHED')->paginate(6);

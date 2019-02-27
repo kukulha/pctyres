@@ -1,5 +1,32 @@
 @extends('layouts.app')
 
+@section('seo')
+    @section('titulo')
+        Lista de Noticias
+    @endsection
+
+    <meta name="keywords" content="@foreach($posts as $post){{ $post->name }},@endforeach">
+    <meta name="description" content="Conoce las ultimas noticias en custion de llantasost->excerpt }}">
+    <!--SEO Twitter -->    
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:title" content="Lista de Articulos">
+    <meta property="twitter:description" content="Conoce las ultimas noticias en custion de llantas">
+    <meta property="twitter:url" content="{{ Request::url()}}">
+    <meta property="twitter:image" content="http://www.pctyres.com/favicon.ico">
+    <meta property="twitter:creator" content="@Kukulha">
+	
+
+    <!--SEO Facebook -->    
+    <meta property="og:title" content="Lista de Articulos">
+    <meta property="og:description" content="Conoce las ultimas noticias en custion de llantas">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{ Request::url()}}">
+    <meta property="og:image" content="http://pctyres.com/favicon.ico">
+    <meta property="og:locale" content="es_MX">
+    <meta property="og:site_name" content="{{ config('app.name', 'Laravel') }}">
+    
+@endsection
+
 @section('content')
 	<main class="container">
 		<div class="center">
@@ -9,7 +36,7 @@
 				<div class="col m6 s12 card card-fixed z-depth-0">
 					<div class="card-image">
 						@if($post->file)
-							<img src="{{ $post->file }}" class="responsive-img" alt="">
+							<img src="{{ Storage::url($post->file) }}" class="responsive-img" alt="">
 						@endif
 					</div>
 					<div class="card-content">

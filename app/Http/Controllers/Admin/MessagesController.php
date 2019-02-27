@@ -3,10 +3,19 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
+use App\Events\MessageWasReceived;
+
+use App\Message;
 
 class MessagesController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['create', 'store']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +23,8 @@ class MessagesController extends Controller
      */
     public function index()
     {
-        //
+        $messages = Message::orderBy('id' , 'DESC')->paginate();
+        return view('admin.messages.index', compact('messages'));
     }
 
     /**
@@ -35,7 +45,11 @@ class MessagesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $message = Message::create($request->all());
+
+        event(new MessageWasReceived($message));
+
+        return back()->with('info', 'Mensaje enviado correctamente');
     }
 
     /**
@@ -46,7 +60,8 @@ class MessagesController extends Controller
      */
     public function show($id)
     {
-        //
+        $message = Message::findOrFail($id);
+        return view('admin.messages.show', compact('message'));
     }
 
     /**
@@ -80,6 +95,7 @@ class MessagesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $message = Message::findOrfail($id)->delete();
+        return back()->with('info', 'Mensaje eliminado correctamente');
     }
 }

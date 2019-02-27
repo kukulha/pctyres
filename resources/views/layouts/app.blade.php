@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--SEO Organico -->  
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>{{ config('app.name', 'Laravel') }} | @yield('titulo')</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="author" content="www.kukulha.com">
+    <meta name="designer" content="www.kukulha.com">
+    <!-- GOOGLE SEO -->    
+    <meta name="robots" content="index,follow" />
+    <meta name="geo.region" content="MX" />
+
+    @yield('seo')
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="author" content="www.kukulha.com">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -17,9 +25,8 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Signika:200,400,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('vendor/lightbox2-master/dist/css/lightbox.min.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.6/dist/jquery.fancybox.min.css" />
-
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -33,17 +40,23 @@
                 <a href="{{ route('home')}}" class="brand-logo"><img src="/img/logo.png" class="responsive-img" alt=""></a>
                 <a href="" class="sidenav-trigger right grey-text text-darken-3" data-target="movil"><i class="material-icons">menu</i></a>
                 <ul class="hide-on-med-and-down right">
-                    <li><a href="{{ route('home') }}">PC Tyres</a></li>
-                    <li><a href="#" class="dropdown-trigger" data-target="dropdown2">Llantas <i class="material-icons right">arrow_drop_down</i></a></li>
-                    <li><a href="{{ route('messages.create') }}">Contacto</a></li>
-                    <li><a href="{{ route('posts') }}">Blog</a></li>
+                    <li><a href="{{ route('home') }}"><i class="fas fa-home right"></i>PC Tyres</a></li>
+                    <li><a href="{{ route('messages.create') }}"><i class="fas fa-envelope right"></i>Contacto</a></li>
+                    <li><a href="{{ route('posts') }}"><i class="fas fa-newspaper right"></i>Blog</a></li>
                     @auth
                     <li>
                         <a class="dropdown-trigger" href="#" data-target="dropdown">
-                            {{ Auth::user()->name }} <i class="material-icons right">arrow_drop_down</i>
+                            <i class="fas fa-user right"></i>{{ Auth::user()->name }}
                         </a>
                     </li>
                     @endauth
+                </ul>
+            </div>
+            <div class="nav-content container">
+                <ul class="hide-on-med-and-down right">
+                    <li><a href="{{ route('tires.camion') }}"><i class="fas fa-truck-moving right"></i>Llantas de Camión </a></li>
+                    <li><a href="{{ route('tires.agricola') }}"><i class="fas fa-tractor right"></i>Llantas de Agricolas e Industriales</a></li>
+                    <li><a href=""><i class="fas fa-truck right"></i>7.50 R17 Double Coin</a></li>
                 </ul>
             </div>
         </nav>
@@ -60,12 +73,6 @@
         </li>
     </ul>
 
-    <ul id='dropdown2' class='dropdown-content'>
-        <li><a href="{{ route('tires.camion') }}">Llantas de Camión </a></li>
-        <li><a href="{{ route('tires.agricola') }}">Llantas de Agricolas e Industriales</a></li>
-        <li><a href="">7.50 R17 Double Coin</a></li>
-    </ul>
-
     <ul id='movil' class='sidenav'>
         <li><a class="grey-text text-darken-3" href="{{ route('home') }}">PC Tyres</a></li>
         <li><a class="grey-text text-darken-3" href="{{ route('tires.camion') }}">Llantas de Camión </a></li>
@@ -75,7 +82,17 @@
         <li><a class="grey-text text-darken-3" href="{{ route('posts') }}">Blog</a></li>
     </ul>
     <br>
+
+    @if(session('info'))
+        <div class="center">
+            <div class="green lighten-5 section ">
+                <p class="green-text text-darken-5">{{ session('info') }}</p>
+            </div>
+        </div>
+    @endif
+    <div class="mt-4">
     @yield('content')
+    </div>
 
     <footer class="page-footer grey darken-3 overflow z-depth-2">
         <div class="container">
@@ -105,10 +122,8 @@
     </footer>
 
     @yield('scripts')
-    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-
-
-<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.6/dist/jquery.fancybox.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.6/dist/jquery.fancybox.min.js"></script>
 
 </body>
 </html>

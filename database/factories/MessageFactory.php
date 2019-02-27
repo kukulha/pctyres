@@ -5,7 +5,7 @@ use App\Message;
 
 $factory->define(Message::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
+        'name' => $faker->firstName,
         'last_name' => $faker->lastName,
         'email' => $faker->email,
         'phone' => $faker->phoneNumber,

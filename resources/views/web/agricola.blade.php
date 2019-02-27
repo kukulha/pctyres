@@ -1,5 +1,32 @@
 @extends('layouts.app')
 
+@section('seo')
+    @section('titulo')
+        Llantas Agricolas e Industriales
+    @endsection
+
+    <meta name="keywords" content="@foreach($tires as $tire){{ $tire->name }},@endforeach">
+    <meta name="description" content="Llantas Agricolas e Industriales">
+    <!--SEO Twitter -->    
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:title" content="Llantas Agricolas e Industriales">
+    <meta property="twitter:description" content="Llantas Agricolas e Industriales">
+    <meta property="twitter:url" content="{{ Request::url()}}">
+    <meta property="twitter:image" content="http://www.pctyres.com/favicon.ico">
+    <meta property="twitter:creator" content="@Kukulha">
+	
+
+    <!--SEO Facebook -->    
+    <meta property="og:title" content="Llantas Agricolas e Industriales">
+    <meta property="og:description" content="Llantas Agricolas e Industriales">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ Request::url()}}">
+    <meta property="og:image" content="http://pctyres.com/favicon.ico">
+    <meta property="og:locale" content="es_MX">
+    <meta property="og:site_name" content="{{ config('app.name', 'Laravel') }}">
+    
+@endsection
+
 @section('content')
 <main>
 	<div class="hero3 section">
@@ -23,7 +50,7 @@
 		<div class="col m4 s12">
 			<div class="card">
 					<div class="card-image">
-						<a href="{{ $tire->data}}" data-fancybox="camion" data-title="{{ $tire->name }}" data-alt="{{ $tire->name }}"><img src="{{ $tire->file }}" alt=""></a>
+						<a href="{{ Storage::url($tire->data) }}" data-fancybox="camion" data-title="{{ $tire->name }}" data-alt="{{ $tire->name }}"><img src="{{ Storage::url($tire->file) }}" alt=""></a>
 					</div>
 
 					<div class="card-content grey darken-3">
@@ -31,7 +58,7 @@
 						<p class="white-text light">{{ $tire->excerpt }}</p>
 						<div class="divider orange darken-3"></div>
 						<br>
-						<img src="{{ $tire->brand }}" class="responsive-img" alt="">
+						<img src="{{ Storage::url($tire->brand) }}" class="responsive-img" alt="">
 					</div>
 			</div>
 		</div>

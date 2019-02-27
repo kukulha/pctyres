@@ -1,5 +1,33 @@
 @extends('layouts.app')
 
+@section('seo')
+    @section('titulo')
+        {{ $post->name }}
+    @endsection
+
+    <meta name="keywords" content="@foreach($post->tags as $tag){{ $tag->name }},@endforeach">
+    <meta name="description" content="{{ $post->excerpt }}">
+    <!--SEO Twitter -->    
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:title" content="{{ $post->name }}">
+    <meta property="twitter:description" content="{{ $post->excerpt }}">
+    <meta property="twitter:url" content="http://pctyres.com">
+    <meta property="twitter:image" content="{{$post->file}}">
+    <meta property="twitter:creator" content="@Kukulha">
+	
+
+    <!--SEO Facebook -->    
+    <meta property="og:title" content="{{ $post->name }}">
+    <meta property="og:description" content="{{ $post->excerpt }}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{ Request::url()}} ">
+    <meta property="og:image" content="http://pctyres.com/favicon.ico">
+    <meta property="og:locale" content="es_MX">
+    <meta property="og:site_name" content="{{ config('app.name', 'Laravel') }}">
+    
+@endsection
+
+
 @section('content')
 	<main class="container">
 		<h2 class="grey-text text-darken-3">{{ $post->name}}</h2>
@@ -7,7 +35,7 @@
 			<div class="col s12">
 				<div class="card z-depth-0">
 					<div class="card-image">
-						<img src="{{ $post->file }}" alt="">
+						<img src="{{ Storage::url($post->file) }}" alt="">
 					</div>
 					<div class="card-content">
 						<span class="card-title">{{ $post->name }}</span>
@@ -35,7 +63,7 @@
 									<div class="col m4 s12">
 										<div class="card card-fixed z-depth-0">
 											<div class="card-image">
-												<img src="{{ $post->file }}">
+												<img src="{{ Storage::url($post->file) }}">
 											</div>
 	        								<div class="card-content">
 						          				<p class="grey-text text-darken-2 justify">{{ $post->excerpt }}</p>

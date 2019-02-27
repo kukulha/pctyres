@@ -1,5 +1,30 @@
 @extends('layouts.app')
 
+@section('seo')
+    @section('titulo')
+        Ponte en contacto con nosotros
+    @endsection
+
+    <!--SEO Twitter -->    
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:title" content="Ponte en contacto con nosotros">
+    <meta property="twitter:description" content="Ponte en contacto con nosotros">
+    <meta property="twitter:url" content="{{ Request::url()}}">
+    <meta property="twitter:image" content="http://www.pctyres.com/favicon.ico">
+    <meta property="twitter:creator" content="@Kukulha">
+	
+
+    <!--SEO Facebook -->    
+    <meta property="og:title" content="Ponte en contacto con nosotros">
+    <meta property="og:description" content="Ponte en contacto con nosotros">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ Request::url()}} ">
+    <meta property="og:image" content="http://pctyres.com/favicon.ico">
+    <meta property="og:locale" content="es_MX">
+    <meta property="og:site_name" content="{{ config('app.name', 'Laravel') }}">
+    
+@endsection
+
 @section('content')
 	<main>
 		<div class="fondo section">
@@ -15,8 +40,8 @@
 								{{ Form::text('name', null) }}
 							</div>
 							<div class="input-field">
-								{{ Form::label('lastname', 'Apellido') }}
-								{{ Form::text('lastname', null) }}
+								{{ Form::label('last_name', 'Apellido') }}
+								{{ Form::text('last_name', null) }}
 							</div>
 							<div class="input-field">
 								{{ Form::label('email', 'Correo Electrónico') }}

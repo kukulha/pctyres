@@ -4,9 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TagStoreRequest;
+use App\Http\Requests\TagUpdateRequest;
+use App\Tag;
 
 class TagsController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +21,9 @@ class TagsController extends Controller
      */
     public function index()
     {
-        //
+        
+        $tags = Tag::orderBy('id', 'DESC')->paginate(10);
+        return view('admin.tags.index', compact('tags'));
     }
 
     /**
@@ -24,7 +33,7 @@ class TagsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.tags.create');
     }
 
     /**
@@ -33,9 +42,10 @@ class TagsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TagStoreRequest $request)
     {
-        //
+        $tag = Tag::create($request->all());
+        return redirect()->route('tags.index')->with('info', 'Categoria creada exitosamente');
     }
 
     /**
@@ -57,7 +67,8 @@ class TagsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $tag = Tag::findOrFail($id);
+        return view('admin.tags.edit', compact('tag'));
     }
 
     /**
@@ -67,9 +78,11 @@ class TagsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TagUpdateRequest $request, $id)
     {
-        //
+        $tag = Tag::findOrFail($id);
+        $tag->fill($request->all())->save();
+        return redirect()->route('tags.index')->with('info', 'Categoria actualizada exitosamente');
     }
 
     /**
@@ -80,6 +93,7 @@ class TagsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tag = Tag::findOrFail($id)->delete();
+        return back()->with('info', 'Categoria eliminada exitosamente');
     }
 }

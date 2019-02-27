@@ -3,10 +3,19 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TireStoreRequest;
+use App\Http\Requests\TireUpdateRequest;
+use App\Tire;
 
 class TiresController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +23,8 @@ class TiresController extends Controller
      */
     public function index()
     {
-        //
+        $tires = Tire::orderBy('id' , 'DESC')->paginate();
+        return view('admin.tires.index', compact('tires'));
     }
 
     /**
@@ -24,7 +34,7 @@ class TiresController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.tires.create');
     }
 
     /**
@@ -33,21 +43,34 @@ class TiresController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TireStoreRequest $request)
     {
-        //
+        $tire = Tire::create($request->all());
+
+        // Imagenes
+        if ($request->file('file')) {
+
+            $tire->file = $request->file('file')->store('public');
+            $tire->save();
+        }
+
+        if ($request->file('brand')) {
+
+            $tire->brand = $request->file('brand')->store('public');
+            $tire->save();
+        }
+
+        if ($request->file('data')) {
+
+            $tire->data = $request->file('data')->store('public');
+            $tire->save();
+        }
+        
+        $tire->save();
+
+        return redirect()->route('tires.index', $tire->id)->with('info', 'Articulo creado correctamente');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -57,7 +80,8 @@ class TiresController extends Controller
      */
     public function edit($id)
     {
-        //
+        $tire = Tire::findOrFail($id);
+        return view('admin.tires.edit', compact('tire'));
     }
 
     /**
@@ -67,9 +91,31 @@ class TiresController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TireUpdateRequest $request, $id)
     {
-        //
+        $tire = Tire::findOrFail($id);
+        $tire->fill($request->all())->save();
+
+        // Imagenes
+        if ($request->file('file')) {
+
+            $tire->file = $request->file('file')->store('public');
+            $tire->save();
+        }
+
+        if ($request->file('brand')) {
+
+            $tire->brand = $request->file('brand')->store('public');
+            $tire->save();
+        }
+
+        if ($request->file('data')) {
+
+            $tire->data = $request->file('data')->store('public');
+            $tire->save();
+        }
+
+        return redirect()->route('tires.index', $tire->id)->with('info', 'Llanta actualizado correctamente');
     }
 
     /**
@@ -80,6 +126,7 @@ class TiresController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tire = Tire::findOrFail($id)->delete();
+        return back()->with('info', 'Llanta eliminada correctamente');
     }
 }
