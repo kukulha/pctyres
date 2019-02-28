@@ -12,7 +12,7 @@
     <meta property="twitter:title" content="{{ $post->name }}">
     <meta property="twitter:description" content="{{ $post->excerpt }}">
     <meta property="twitter:url" content="http://pctyres.com">
-    <meta property="twitter:image" content="{{$post->file}}">
+    <meta property="twitter:image" content="{{ Storage::url($post->file) }}">
     <meta property="twitter:creator" content="@Kukulha">
 	
 
@@ -21,9 +21,40 @@
     <meta property="og:description" content="{{ $post->excerpt }}">
     <meta property="og:type" content="article">
     <meta property="og:url" content="{{ Request::url()}} ">
-    <meta property="og:image" content="http://pctyres.com/favicon.ico">
+    <meta property="og:image" content="{{ Storage::url($post->file) }}">
     <meta property="og:locale" content="es_MX">
     <meta property="og:site_name" content="{{ config('app.name', 'Laravel') }}">
+
+    <!--Schema.org-->
+    <script type="application/ld+json">
+        {
+            "@context": "http://schema.org/",
+            "@type": "Article",
+            "url": "{{ Request::url()}}",
+            "image": "http://www.pctyres.com/{{ Storage::url($post->file) }}",
+            "headline" : "{{ $post->name }}",
+            "description" : "{{ $post->excerpt }}",
+            "author" : {
+            	"@type": "Person",
+            	"name": "{{ $post->user->name }}"
+        	},
+            "datePublished": "{{ $post->created_at }}",
+            "dateModified": "{{ $post->updated_at }}",
+            "publisher": {
+            	"@type" : "Organization",
+            	"name" : "PC Tyres",
+            	"logo" : {
+					"@type" : "ImageObject",
+					"url" : "http://www.pctyres.com/img/logo.png"
+            	}
+        	},
+            "articleBody": "{{ $post->body }}",
+            "mainEntityOfPage": {
+            	"@type" : "WebSite",
+            	"url" : "http://www.pctyres.com"
+        	}
+        }
+    </script>
     
 @endsection
 

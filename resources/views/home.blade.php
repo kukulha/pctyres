@@ -25,6 +25,27 @@
     <meta property="og:locale" content="es_MX">
     <meta property="og:site_name" content="{{ config('app.name', 'Laravel') }}">
 
+    <!--Schema.org-->
+    <script type="application/ld+json">
+        {
+            "@context": "http://schema.org/",
+            "@type": "LocalBusiness",
+            "name": "Pc Tyres",
+            "url": "http://www.pctyres.com",
+            "image": "http://pctyres.com/img/logo.png",
+            "description" : "Las mejores llantas para tu trabajo",
+            "telephone": "3787014902",
+            "address" : {
+                "@type": "PostalAddress",
+                "addressLocality": "Jalisco, México",
+                "addressRegion": "MX",
+                "postalCode": "47600",
+                "streetAddress": "Blvd. Anacleto González Flores Sur #660"
+            },
+            "priceRange" : "$$$",
+            "openingHours": ["Mo-Fr 08:00-18:00", "St 8:00-14:00"]
+        }
+    </script>
 @endsection
 
 @section('content')
@@ -55,16 +76,16 @@
                     <h4 class="orange-text text-darken-3">para tu trabajo</h4>
                     <div class="col m4 s12 roll">
                         <img src="/img/llantas2.png" class="responsive-img" alt="">
-                        <h5 class="grey-text text-darken-3">Camión</h5>
+                        <h5 class="grey-text text-darken-3">Agricola</h5>
                     </div>
                     <div class="col m4 s12 roll">
                         <img src="/img/llantas2.png" class="responsive-img" alt="">
-                        <h5 class="grey-text text-darken-3">Construcción</h5>
+                        <h5 class="grey-text text-darken-3">Industrial/OTR</h5>
 
                     </div>
                     <div class="col m4 s12 roll">
                         <img src="/img/llantas2.png" class="responsive-img" alt="">
-                        <h5 class="grey-text text-darken-3">Agricultura</h5>
+                        <h5 class="grey-text text-darken-3">Camiones y Autobuses</h5>
 
                     </div>
                 </div>

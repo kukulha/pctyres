@@ -24,6 +24,30 @@
     <meta property="og:image" content="http://pctyres.com/favicon.ico">
     <meta property="og:locale" content="es_MX">
     <meta property="og:site_name" content="{{ config('app.name', 'Laravel') }}">
+
+    @foreach($tires as $tire)
+     <!--Schema.org-->
+    <script type="application/ld+json">
+        {
+            "@context": "http://schema.org/",
+            "@type": "Product",
+            "name" : "{{ $tire->name }}",
+            "model": "{{ $tire->name }}",
+            "url": "{{ Request::url() }}",
+            "image": "http://www.pctyres.com{{ Storage::url($tire->file) }}",
+            "description" : "Las mejores llantas para tu trabajo",
+            "brand" : {
+                "@type" : "Organization",
+                "name" : "PC Tyres",
+                "logo" : {
+                    "@type" : "ImageObject",
+                    "url" : "http://www.pctyres.com/img/logo.png"
+                }
+            },
+            "sku": "{{ $tire->name }}"
+        }
+    </script>
+    @endforeach
     
 @endsection
 

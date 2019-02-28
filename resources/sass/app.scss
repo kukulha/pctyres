@@ -11,6 +11,9 @@
 
 *{
 	font-family: 'Signika', sans-serif;
+	margin:0;
+	padding: 0;
+	box-sizing:border-box;
 }
 .roll{
 	transition: all 1s ease;
@@ -100,6 +103,35 @@ nav ul li a:hover{
 	background: rgba(229,133,3);
 	color: white !important;
 	cursor: pointer;
+}
+.social{
+	position: fixed;
+	left: 0;
+	top: 200px;
+	z-index: 5000;
+}
+.social ul{
+	list-style: none;
+}
+
+.social ul li a{
+	display: inline-block;
+	padding: 15px;
+	background: #000;
+	text-decoration: none;
+	-webkit-transition: all .5s ease;
+	-o-transition: all .5s ease;
+	transition: all .5s ease;
+	width: 50px;
+}
+.social ul li .icon-facebook{
+	background: #3b5998;
+}
+.social ul li .icon-instagram{
+	background: #cd486b;
+}
+.social ul li a:hover{
+	padding: 15px 50px;
 }
 
 //Fuentes

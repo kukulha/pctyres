@@ -32,12 +32,19 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
+
+    <div class="social hide-on-med-and-down">
+        <ul>
+            <li><a href="https://www.facebook.com/pctyresmexico/?__tn__=%2Cd%2CP-R&eid=ARCup-OKWGW3JmMNh6kLwUet3IDpdJqw3puK3zq87t84QbTx_nAaEw8ZIshfummDimceoSN5r1-Q-ho9" class="icon-facebook" target="_blank"><i class="fab fa-facebook-f white-text"></i></a></li>
+            <li><a href="https://www.instagram.com/pctyres/" class="icon-instagram" target="_blank"><i class="fab fa-instagram white-text"></i></a></li>
+        </ul>
+    </div>
     
     <div class="navbar-fixed">
         <nav class="white nav-extended">
             <hr class="grey darken-3">
             <div class="nav-wrapper container">
-                <a href="{{ route('home')}}" class="brand-logo"><img src="/img/logo.png" class="responsive-img" alt=""></a>
+                <a href="{{ route('home')}}" class="brand-logo" itemprop="logo"><img src="/img/logo.png" class="responsive-img" alt=""></a>
                 <a href="" class="sidenav-trigger right grey-text text-darken-3" data-target="movil"><i class="material-icons">menu</i></a>
                 <ul class="hide-on-med-and-down right">
                     <li><a href="{{ route('home') }}"><i class="fas fa-home right"></i>PC Tyres</a></li>
