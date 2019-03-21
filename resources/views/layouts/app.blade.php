@@ -18,9 +18,6 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Signika:200,400,700" rel="stylesheet">
@@ -112,6 +109,7 @@
                         <li><a class="white-text" href="">7.50 R17 Double Coin</a></li>
                         <li><a class="white-text" href="{{ route('messages.create') }}">Contacto</a></li>
                         <li><a class="white-text" href="{{ route('posts') }}">Blog</a></li>
+                        <li><a class="white-text" href="{{ route('aviso') }}">Aviso de Privacidad</a></li>
                     </ul>
                 </div>
                 <div class="col m4 s12 center">
@@ -127,7 +125,8 @@
             </div>
         </div>
     </footer>
-
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
     @yield('scripts')
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.6/dist/jquery.fancybox.min.js"></script>

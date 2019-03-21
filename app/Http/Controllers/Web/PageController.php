@@ -22,6 +22,11 @@ class PageController extends Controller
         return view('home', compact('posts'));
     }
 
+    public function aviso()
+    {
+        return view('web.aviso');
+    }
+
     public function blog()
     {
     	$posts = Post::orderBy('id', 'DESC')->where('status', 'PUBLISHED')->paginate(6);

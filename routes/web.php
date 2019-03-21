@@ -24,6 +24,7 @@ Auth::routes();
 //Web
 Route::get('/', 'Web\PageController@index')->name('home');
 
+Route::get('/aviso-de-privacidad', 'Web\PageController@aviso')->name('aviso');
 Route::get('/entradas', 'Web\PageController@blog')->name('posts');
 Route::get('/entradas/{slug}', 'Web\PageController@post')->name('post');
 Route::get('/categoria/{slug}', 'Web\PageController@category')->name('category');
